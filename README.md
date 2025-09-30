@@ -34,7 +34,7 @@ Dependencies are minimal – the main external library is `python-docx` for Word
 ## Usage – CLI
 
 ```bash
-python chart_generator.py <chart.txt> [--key NEW_KEY | --nashville] [-o OUTPUT.docx]
+python chart_generator.py <chart.txt> [--key NEW_KEY | --nashville] [-o OUTPUT.docx] [--input-key KEY]
                          [--input-dir DIR] [--output-dir DIR] [--max-width N]
 ```
 
@@ -47,6 +47,7 @@ Arguments:
 | `--input-dir DIR`  | Directory where charts are stored (default: `input/`).                                                                                          |
 | `--output-dir DIR` | Directory where generated DOCX files are written (default: `output/`).                                                                          |
 | `--key NEW_KEY`    | Transpose to a new key (e.g. `G`, `F#`, `Bb`).                                                                                                  |
+| `--input-key KEY`  | Specify the original key of the input chart (overrides auto-detection).                                                                         |
 | `--nashville`      | Convert chords to Nashville numbers (uses detected key).                                                                                        |
 | `--max-width N`    | Wrap / truncate lines at width _N_ (default **80**).                                                                                            |
 
