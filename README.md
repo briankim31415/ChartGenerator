@@ -47,8 +47,8 @@ Arguments:
 | `--input-dir DIR`  | Directory where charts are stored (default: `input/`).                                                                                          |
 | `--output-dir DIR` | Directory where generated DOCX files are written (default: `output/`).                                                                          |
 | `--key NEW_KEY`    | Transpose to a new key (e.g. `G`, `F#`, `Bb`).                                                                                                  |
-| `--input-key KEY`  | Specify the original key of the input chart (overrides auto-detection).                                                                         |
-| `--nashville`      | Convert chords to Nashville numbers (uses detected key).                                                                                        |
+| `--input-key KEY`  | Specify the original key of the input chart (default: `C`; overrides auto-detection).                                                           |
+| `--nashville`      | Convert chords to Nashville numbers (default: enabled).                                                                                         |
 | `--max-width N`    | Wrap / truncate lines at width _N_ (default **80**).                                                                                            |
 
 Only one of `--key` _or_ `--nashville` should be supplied.
