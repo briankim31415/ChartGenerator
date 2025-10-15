@@ -22,12 +22,28 @@ def main(argv=None):
     parser.add_argument("--max-width", type=int, default=80, help="Maximum text width")
     args = parser.parse_args(argv)
 
-    # Resolve input path: if supplied path exists, use as-is else look in input-dir
-    input_path = Path(args.chart)
-    if not input_path.exists():
-        input_path = Path(args.input_dir) / args.chart
-    if not input_path.exists():
-        parser.error(f"Input chart '{args.chart}' not found (looked in current dir and '{args.input_dir}/').")
+    # Resolve input path: support bare names by defaulting to .txt when needed
+    supplied_path = Path(args.chart)
+    candidate_paths = []
+
+    def _add_candidate(path: Path) -> None:
+        if path not in candidate_paths:
+            candidate_paths.append(path)
+
+    _add_candidate(supplied_path)
+    if not supplied_path.suffix:
+        _add_candidate(supplied_path.with_suffix(".txt"))
+
+    input_dir_path = Path(args.input_dir) / args.chart
+    _add_candidate(input_dir_path)
+    if not input_dir_path.suffix:
+        _add_candidate(input_dir_path.with_suffix(".txt"))
+
+    input_path = next((p for p in candidate_paths if p.exists()), None)
+    if not input_path:
+        parser.error(
+            f"Input chart '{args.chart}' not found (searched current dir and '{args.input_dir}/' with optional '.txt' suffix)."
+        )
 
     # Ensure output directory exists
     output_dir = Path(args.output_dir)
